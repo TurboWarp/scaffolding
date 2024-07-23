@@ -4,11 +4,12 @@
 
   </head>
   <body>
+    <p id="progress">Loading scaffolding...</p>
     <div id="container" style="max-width: 480px; aspect-ratio: 4 / 3;"></div>
 
     <script src="../dist/scaffolding-min.js"></script>
     <script>
-      // see https://docs.turbowarp.org/unshared-projects#developers
+      // See https://docs.turbowarp.org/unshared-projects#developers
       const getProjectMetadata = async (projectId) => {
         const response = await fetch(`https://trampoline.turbowarp.org/api/projects/${projectId}`);
         if (response.status === 404) {
@@ -32,19 +33,28 @@
       };
 
       const scaffolding = new Scaffolding.Scaffolding();
+      scaffolding.editableLists = true;
       scaffolding.setup();
       scaffolding.appendTo(document.querySelector('#container'));
 
+      const vm = scaffolding.vm;
       const storage = scaffolding.storage;
+
+      // TurboWarp-only extension
+      vm.on('ASSET_PROGRESS', (finished, total) => {
+        document.querySelector('#progress').textContent = `Loading assets: ${finished} / ${total}`;
+      });
+
       storage.addWebStore(
         [storage.AssetType.ImageVector, storage.AssetType.ImageBitmap, storage.AssetType.Sound],
         (asset) => `https://assets.scratch.mit.edu/internalapi/asset/${asset.assetId}.${asset.dataFormat}/get/`
       );
 
       (async () => {
-        const project = await getProjectData('60917032');
+        document.querySelector('#progress').textContent = 'Loading project data...';
+        const project = await getProjectData('1049271245');
         await scaffolding.loadProject(project);
-        await scaffolding.greenFlag();
+        scaffolding.greenFlag();
       })();
     </script>
   </body>

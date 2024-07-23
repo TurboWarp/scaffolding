@@ -1,6 +1,6 @@
 import ContextMenu from './context-menu.js';
 import DropArea from './drop-area.js';
-import downloadBlob from './download.js';
+import downloadBlob from './download-file.js';
 
 const readAsText = (blob) => new Promise((resolve, reject) => {
   const fr = new FileReader();

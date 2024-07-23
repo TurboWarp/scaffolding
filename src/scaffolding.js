@@ -2,17 +2,28 @@ import Packages from './packages.js';
 import VideoProvider from './video-provider.js';
 import {CloudManager} from './cloud-variables.js';
 import ControlBar from './control-bar.js';
+import {ListMonitor, VariableMonitor} from './monitor.js';
+import Question from './question.js';
 import defaultMessages from './messages.json';
 
-const getEventXY = (e) => {
-  if (e.touches && e.touches[0]) {
-    return {x: e.touches[0].clientX, y: e.touches[0].clientY};
-  } else if (e.changedTouches && e.changedTouches[0]) {
-    return {x: e.changedTouches[0].clientX, y: e.changedTouches[0].clientY};
+/**
+ * @param {MouseEvent|TouchEvent} event
+ * @returns {{x: number; y: number;}}
+ */
+const getEventXY = (event) => {
+  if (event.touches && event.touches[0]) {
+    return {x: event.touches[0].clientX, y: event.touches[0].clientY};
+  } else if (event.changedTouches && event.changedTouches[0]) {
+    return {x: event.changedTouches[0].clientX, y: event.changedTouches[0].clientY};
   }
-  return {x: e.clientX, y: e.clientY};
+  return {x: event.clientX, y: event.clientY};
 };
 
+/**
+ * @template T
+ * @param {T | () => T} value 
+ * @returns {() => T}
+ */
 const wrapAsFunctionIfNotFunction = (value) => {
   if (typeof value === 'function') {
     return value;
@@ -20,10 +31,18 @@ const wrapAsFunctionIfNotFunction = (value) => {
   return () => value;
 };
 
+/**
+ * @param {unknown} value
+ * @returns {value is (number|string|boolean)}
+ */
 const isValidVariableValue = (value) => (
   typeof value === 'number' || typeof value === 'string' || typeof value === 'boolean'
 );
 
+/**
+ * @param {unknown} value
+ * @returns {value is Array<number|string|boolean>}
+ */
 const isValidListValue = (value) => {
   if (!Array.isArray(value)) return false;
   // Array.prototype.every does not work here because we want to reject arrays with holes eg. new Array(1)

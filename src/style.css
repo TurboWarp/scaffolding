@@ -1,5 +1,5 @@
 /* scaffolding styles */
-/* all of our classes/variabels start with sc- to avoid conflicts and are reasonably stable */
+/* all of our classes/variables start with sc- to avoid conflicts and are reasonably stable */
 
 .sc-root {
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
@@ -95,7 +95,6 @@
   cursor: pointer;
   color: white;
   background-color: var(--sc-accent-color);
-  background-image: url(check.svg);
   overflow: hidden;
 }
 .sc-question-submit-button:focus {
@@ -157,19 +156,19 @@
   white-space: pre-wrap;
   background-color: #0fbd8c;
 }
-.sc-monitor-root[data-opcode^="motion_"] .monitor-value-color {
+.sc-monitor-root[data-opcode^="motion_"] .sc-monitor-value-color {
   background-color: #4c97ff;
 }
-.sc-monitor-root[data-opcode^="sensing_"] .monitor-value-color {
+.sc-monitor-root[data-opcode^="sensing_"] .sc-monitor-value-color {
   background-color: #5cb1d6;
 }
-.sc-monitor-root[data-opcode^="data_"] .monitor-value-color {
+.sc-monitor-root[data-opcode^="data_"] .sc-monitor-value-color {
   background-color: #ff8c1a;
 }
-.sc-monitor-root[data-opcode^="looks_"] .monitor-value-color {
+.sc-monitor-root[data-opcode^="looks_"] .sc-monitor-value-color {
   background-color: #9966ff;
 }
-.sc-monitor-root[data-opcode^="sound_"] .monitor-value-color {
+.sc-monitor-root[data-opcode^="sound_"] .sc-monitor-value-color {
   background-color: #cf63cf;
 }
 .sc-monitor-large-value {
