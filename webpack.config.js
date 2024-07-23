@@ -1,14 +1,14 @@
 const path = require('path');
+const EagerImportsPlugin = require('./src-build/eager-imports-plugin/eager-imports-plugin.js');
 
 const isProduction = process.env.NODE_ENV === 'production';
-const dist = path.resolve(__dirname, 'dist');
 
 const makeScaffolding = ({inlineMusic}) => ({
   mode: isProduction ? 'production' : 'development',
-  devtool: isProduction ? '' : 'source-map',
+  devtool: 'source-map',
   output: {
     filename: '[name].js',
-    path: dist
+    path: path.resolve(__dirname, 'dist')
   },
   entry: inlineMusic ? {
     'scaffolding-inline-music': './src/index.js'
@@ -47,10 +47,13 @@ const makeScaffolding = ({inlineMusic}) => ({
       },
     ]
   },
+  plugins: [
+    new EagerImportsPlugin(),
+  ],
   resolveLoader: {
     modules: [
       // Replace worker-loader with our own modified version
-      // path.resolve(__dirname, 'src-build', 'module-overrides', 'inline-worker-loader'),
+      path.resolve(__dirname, 'src-build', 'inline-worker-loader'),
       'node_modules',
     ],
   },
