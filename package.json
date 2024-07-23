@@ -1,0 +1,31 @@
+{
+  "name": "@turbowarp/scaffolding",
+  "version": "2.0.0-alpha.0",
+  "description": "Scratch project runner.",
+  "main": "src/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "webpack",
+    "prepublishOnly": "cross-env NODE_ENV=production webpack"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/TurboWarp/scaffolding.git"
+  },
+  "author": "Thomas Weber",
+  "license": "MPL-2.0",
+  "homepage": "https://github.com/TurboWarp/scaffolding",
+  "devDependencies": {
+    "@babel/core": "^7.24.0",
+    "@babel/preset-env": "^7.24.0",
+    "@turbowarp/jszip": "^3.11.1",
+    "@turbowarp/scratch-storage": "^0.0.0-development-202401111301-7559569",
+    "@turbowarp/scratch-svg-renderer": "^1.0.202407162159",
+    "babel-loader": "^8.3.0",
+    "scratch-audio": "github:TurboWarp/scratch-audio#develop",
+    "scratch-render": "github:TurboWarp/scratch-render#develop",
+    "scratch-vm": "github:TurboWarp/scratch-vm#develop",
+    "webpack": "^4.47.0",
+    "webpack-cli": "^4.10.0"
+  }
+}

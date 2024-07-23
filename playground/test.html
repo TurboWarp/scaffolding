@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+  <head>
+
+  </head>
+  <body>
+    <div id="container" style="max-width: 480px; aspect-ratio: 4 / 3;"></div>
+
+    <script src="../dist/scaffolding-min.js"></script>
+    <script>
+      // see https://docs.turbowarp.org/unshared-projects#developers
+      const getProjectMetadata = async (projectId) => {
+        const response = await fetch(`https://trampoline.turbowarp.org/api/projects/${projectId}`);
+        if (response.status === 404) {
+          throw new Error('The project is unshared or does not exist');
+        }
+        if (!response.ok) {
+          throw new Error(`HTTP error ${response.status} fetching project metadata`);
+        }
+        const json = await response.json();
+        return json;
+      };
+      const getProjectData = async (projectId) => {
+        const metadata = await getProjectMetadata(projectId);
+        const token = metadata.project_token;
+        const response = await fetch(`https://projects.scratch.mit.edu/${projectId}?token=${token}`);
+        if (!response.ok) {
+          throw new Error(`HTTP error ${response.status} fetching project data`);
+        }
+        const data = await response.arrayBuffer();
+        return data;
+      };
+
+      const scaffolding = new Scaffolding.Scaffolding();
+      scaffolding.setup();
+      scaffolding.appendTo(document.querySelector('#container'));
+
+      const storage = scaffolding.storage;
+      storage.addWebStore(
+        [storage.AssetType.ImageVector, storage.AssetType.ImageBitmap, storage.AssetType.Sound],
+        (asset) => `https://assets.scratch.mit.edu/internalapi/asset/${asset.assetId}.${asset.dataFormat}/get/`
+      );
+
+      (async () => {
+        const project = await getProjectData('60917032');
+        await scaffolding.loadProject(project);
+        await scaffolding.greenFlag();
+      })();
+    </script>
+  </body>
+</html>
