@@ -22,6 +22,7 @@
     "@turbowarp/scratch-storage": "^0.0.0-development-202401111301-7559569",
     "@turbowarp/scratch-svg-renderer": "^1.0.202407162159",
     "babel-loader": "^8.3.0",
+    "cross-env": "^7.0.3",
     "scratch-audio": "github:TurboWarp/scratch-audio#develop",
     "scratch-render": "github:TurboWarp/scratch-render#develop",
     "scratch-vm": "github:TurboWarp/scratch-vm#develop",
