@@ -1,4 +1,3 @@
-import JSZip from '@turbowarp/jszip';
 import Scaffolding from './scaffolding.js';
 import * as CloudVariables from './cloud-variables.js';
 import Packages from './packages.js';
@@ -18,5 +17,4 @@ export {
   Scaffolding,
   CloudVariables,
   Packages,
-  JSZip
 };
