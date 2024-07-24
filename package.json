@@ -1,10 +1,11 @@
 {
   "name": "@turbowarp/scaffolding",
-  "version": "2.0.0-alpha.0",
-  "description": "Scratch project runner.",
-  "main": "./dist/scaffolding.js",
+  "version": "0.0.1",
+  "description": "Minimal Scratch project runner.",
+  "main": "./dist/scaffolding-min.js",
   "exports": {
-    ".": "./dist/scaffolding.js",
+    ".": "./dist/scaffolding-min.js",
+    "./min": "./dist/scaffolding-min.js",
     "./with-music": "./dist/scaffolding-with-music.js"
   },
   "scripts": {

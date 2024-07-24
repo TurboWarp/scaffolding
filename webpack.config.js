@@ -23,7 +23,7 @@ const makeScaffolding = ({withMusic}) => ({
   entry: withMusic ? {
     'scaffolding-with-music': './src/index.js'
   } : {
-    'scaffolding': './src/index.js'
+    'scaffolding-min': './src/index.js'
   },
   resolve: {
     alias: {
