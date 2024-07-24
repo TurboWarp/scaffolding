@@ -1,15 +1,22 @@
-const path = require('path');
+const path = require('node:path');
+const fs = require('node:fs');
 const webpack = require('webpack');
 const EagerImportsPlugin = require('./src-build/eager-imports-plugin/eager-imports-plugin.js');
 
 const isProduction = process.env.NODE_ENV === 'production';
+
+const dist = path.resolve(__dirname, 'dist');
+fs.rmSync(dist, {
+  force: true,
+  recursive: true
+});
 
 const makeScaffolding = ({withMusic}) => ({
   mode: isProduction ? 'production' : 'development',
   devtool: 'source-map',
   output: {
     filename: '[name].js',
-    path: path.resolve(__dirname, 'dist')
+    path: dist
   },
   entry: withMusic ? {
     'scaffolding-with-music': './src/index.js'
