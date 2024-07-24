@@ -1,19 +1,20 @@
 const path = require('path');
+const webpack = require('webpack');
 const EagerImportsPlugin = require('./src-build/eager-imports-plugin/eager-imports-plugin.js');
 
 const isProduction = process.env.NODE_ENV === 'production';
 
-const makeScaffolding = ({inlineMusic}) => ({
+const makeScaffolding = ({withMusic}) => ({
   mode: isProduction ? 'production' : 'development',
   devtool: 'source-map',
   output: {
     filename: '[name].js',
     path: path.resolve(__dirname, 'dist')
   },
-  entry: inlineMusic ? {
-    'scaffolding-inline-music': './src/index.js'
+  entry: withMusic ? {
+    'scaffolding-with-music': './src/index.js'
   } : {
-    'scaffolding-min': './src/index.js'
+    'scaffolding': './src/index.js'
   },
   resolve: {
     alias: {
@@ -34,13 +35,13 @@ const makeScaffolding = ({inlineMusic}) => ({
         }
       },
       {
-        test: /\.mp3$/i,
+        test: /scratch3_music[/\\]assets[/\\].*\.mp3$/i,
         use: [
           {
-            loader: inlineMusic ? (
-              path.resolve(__dirname, 'src-build', 'cjs-url-loader')
+            loader: withMusic ? (
+              path.resolve(__dirname, 'src-build', 'cjs-data-url-loader')
             ) : (
-              path.resolve(__dirname, 'src-build', 'cjs-noop-loader')
+              path.resolve(__dirname, 'src-build', 'cjs-remote-music-asset-loader')
             )
           }
         ]
@@ -48,6 +49,9 @@ const makeScaffolding = ({inlineMusic}) => ({
     ]
   },
   plugins: [
+    new webpack.DefinePlugin({
+      'process.env.NODE_ENV': JSON.stringify(isProduction ? 'production' : 'development')
+    }),
     new EagerImportsPlugin(),
   ],
   resolveLoader: {
@@ -60,6 +64,6 @@ const makeScaffolding = ({inlineMusic}) => ({
 });
 
 module.exports = [
-  makeScaffolding({inlineMusic: true}),
-  makeScaffolding({inlineMusic: false})
+  makeScaffolding({withMusic: false}),
+  makeScaffolding({withMusic: true})
 ];
