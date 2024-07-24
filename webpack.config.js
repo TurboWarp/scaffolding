@@ -59,6 +59,10 @@ const makeScaffolding = ({withMusic}) => ({
     new webpack.DefinePlugin({
       'process.env.NODE_ENV': JSON.stringify(isProduction ? 'production' : 'development')
     }),
+    new webpack.BannerPlugin({
+      banner: `Scaffolding (${withMusic ? 'with music' : 'min'}) | https://github.com/TurboWarp/scaffolding (MPL-2.0) | =^..^=`,
+      entryOnly: true
+    }),
     new EagerImportsPlugin(),
   ],
   resolveLoader: {
