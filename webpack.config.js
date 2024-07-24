@@ -15,6 +15,8 @@ const makeScaffolding = ({withMusic}) => ({
   mode: isProduction ? 'production' : 'development',
   devtool: 'source-map',
   output: {
+    library: 'Scaffolding',
+    libraryTarget: 'umd',
     filename: '[name].js',
     path: dist
   },

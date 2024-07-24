@@ -16,7 +16,7 @@ styleElement.textContent = cssText;
 const styleContainer = document.head || document.body || document.documentElement;
 styleContainer.appendChild(styleElement);
 
-window.Scaffolding = {
+export {
   Scaffolding,
   CloudVariables,
   Packages
