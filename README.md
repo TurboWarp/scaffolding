@@ -150,7 +150,7 @@ storage.addWebStore(
 );
 ```
 
-You can supply scaffolding with a project.json file or a full sb, sb2, or sb3 file as an ArrayBuffer, Uint8Array, or Blob and then feed it into `scaffolding.loadProject`. However you go about acquiring those is up to you; you can ask the user to enter one into an input or fetch it from your own server. If you want to load projects from Scratch, we suggest the following as a starting point.
+You can supply scaffolding with a project.json file or a full sb, sb2, or sb3 file as an ArrayBuffer or Uint8Array and then feed it into `scaffolding.loadProject`. However you go about acquiring those is up to you; you can ask the user to enter one into an input or fetch it from your own server. If you want to load projects from Scratch, we suggest the following as a starting point.
 
 ```js
 // See https://docs.turbowarp.org/unshared-projects#developers
@@ -183,7 +183,7 @@ const loadProject = (projectId) => {
 loadProject('60917032');
 ```
 
-Once the project loads, you can start the project with
+Loading projects takes a while, so this returns a Promise that resolves when the project loads. Once it loads, you can start the project with:
 
 ```js
 scaffolding.greenFlag();
