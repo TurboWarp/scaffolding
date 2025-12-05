@@ -1,6 +1,7 @@
 import ContextMenu from './context-menu.js';
 import DropArea from './drop-area.js';
 import downloadBlob from './download-file.js';
+import {safeStringify} from './safe-stringify.js';
 
 const readAsText = (blob) => new Promise((resolve, reject) => {
   const fr = new FileReader();
@@ -200,9 +201,11 @@ class VariableMonitor extends Monitor {
     }
 
     let value = monitor.get('value');
-    if (typeof value === 'number') {
+    if (typeof value === 'number' && !Object.is(value, -0)) {
       value = Number(value.toFixed(6));
     }
+    value = safeStringify(value);
+
     if (this._value !== value) {
       this._value = value;
       this.valueElement.textContent = value;
@@ -364,6 +367,8 @@ class Row {
   }
 
   setValue (value) {
+    value = safeStringify(value);
+
     if (this.value !== value && !this.locked) {
       this.value = value;
       if (this.editable) {
