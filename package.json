@@ -23,9 +23,9 @@
   "devDependencies": {
     "@babel/core": "^7.24.0",
     "@babel/preset-env": "^7.24.0",
-    "@turbowarp/jszip": "^3.11.1",
-    "@turbowarp/scratch-storage": "^0.0.0-development-202401111301-7559569",
-    "@turbowarp/scratch-svg-renderer": "^1.0.202407162159",
+    "@turbowarp/jszip": "^3.12.0",
+    "@turbowarp/scratch-storage": "^2.0.0",
+    "@turbowarp/scratch-svg-renderer": "^1.1.0",
     "babel-loader": "^8.3.0",
     "cross-env": "^7.0.3",
     "scratch-audio": "github:TurboWarp/scratch-audio#develop",
